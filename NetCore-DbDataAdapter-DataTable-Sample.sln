@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{47330F40-3A5C-488A-BD88-53E8AD71338C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCore-DbDataAdapter-DataTable-Sample", "src\NetCore-DbDataAdapter-DataTable-Sample.csproj", "{98CD1E21-C42F-40A2-AF9A-0C8CE8339B5A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{41F3BCBC-1C55-469E-8EA3-B0CB45A8964C}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +16,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{47330F40-3A5C-488A-BD88-53E8AD71338C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{47330F40-3A5C-488A-BD88-53E8AD71338C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{47330F40-3A5C-488A-BD88-53E8AD71338C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{47330F40-3A5C-488A-BD88-53E8AD71338C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98CD1E21-C42F-40A2-AF9A-0C8CE8339B5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98CD1E21-C42F-40A2-AF9A-0C8CE8339B5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98CD1E21-C42F-40A2-AF9A-0C8CE8339B5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98CD1E21-C42F-40A2-AF9A-0C8CE8339B5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
