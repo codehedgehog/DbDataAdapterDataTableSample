@@ -2,42 +2,28 @@
 {
 	using System;
 	using System.Data;
-	using System.Data.Common;
 	using System.Data.SqlClient;
 	using static System.Configuration.ConfigurationManager;
 
-	class Program
+	internal class Program
 	{
-		static void Main(string[] args)
+		private static void Main(string[] args)
 		{
+			string sqlCommandText = "SELECT TOP 5 [t].[Description] [TermName] FROM [dbo].[tblTerm] [t] ORDER BY [t].[TermCode] DESC";
 			using (SqlConnection theSqlConn = new SqlConnection(connectionString: ConnectionStrings["theDatabaseDbContext"].ConnectionString))
 			{
-				Console.WriteLine("Playing with System.Data.SqlClient\n==================================\n\n");
-				Console.WriteLine("Open SQL Server Database Connection\n==================================\n");
+				Console.WriteLine("\nPlaying with System.Data.SqlClient in .NET Core 2.x\n==================================\n");
+				Console.WriteLine("\n\nOpen SQL Server Database Connection\n===================================");
 				theSqlConn.Open();
-				DataTable resultDataTable = FillDataTableUsingSqlDataAdapter(
-					conn: theSqlConn, cmdType: CommandType.Text, 
-				  cmdText:	"SELECT TOP 5 [t].[Description] [TermName] FROM [dbo].[tblTerm] [t] ORDER BY [t].[TermCode] DESC", cmdParms: null);
-				foreach (DataRow term in resultDataTable.Rows)
-				{
-					Console.WriteLine(term[0]);
-				}
-				//try
-				//{
-				//	using (SqlCommand theCommand = new SqlCommand("SELECT * FROM SAMPLETABLE", theSqlConn))
-				//	{
-				//		theCommand.ExecuteNonQuery();
-				//	}
-				//}
-				//catch
-				//{
-				//	Console.WriteLine("Something went wrong");
-				//}
-				//finally
-				//{
-				//	if (theSqlConn != null && theSqlConn.State != ConnectionState.Closed) theSqlConn.Close();
-				//}
-				Console.WriteLine("\nPress any key to continue...");
+				Console.WriteLine("\n\nFill DataTable using SqlDataAdapter\n===================================");
+				DataTable resultDataTable = FillDataTableUsingSqlDataAdapter(conn: theSqlConn, cmdType: CommandType.Text, cmdText: sqlCommandText, cmdParms: null);
+				foreach (DataRow term in resultDataTable.Rows) { Console.WriteLine(term[0]); }
+				resultDataTable = null;
+				Console.WriteLine("\n\nLoad DataTable using SqlCommand ExecuteReader\n=============================================");
+				resultDataTable = LoadDataTableUsingExecuteReader(conn: theSqlConn, cmdType: CommandType.Text, cmdText: sqlCommandText, cmdParms: null);
+				foreach (DataRow term in resultDataTable.Rows) { Console.WriteLine(term[0]); }
+				if (theSqlConn != null && theSqlConn.State != ConnectionState.Closed) theSqlConn.Close();
+				Console.WriteLine("\n\nPress any key to continue...");
 				Console.ReadLine();
 			}
 		}
@@ -50,22 +36,16 @@
 			return result;
 		}
 
-
-		//public static DataTable ExecuteDataTable(SqlConnection conn, CommandType cmdType, string cmdText, SqlParameter[] cmdParms)
-		//{
-		//	DataTable dt = new DataTable();
-		//	// just doing this cause dr.load fails
-		//	dt.Columns.Add("CustomerID");
-		//	dt.Columns.Add("CustomerName");
-		//	DbDataReader dr = ExecuteReader(conn, cmdType, cmdText, cmdParms);
-		//	// dt.Load(dr);
-		//	while (dr.Read())
-		//	{
-		//		dt.Rows.Add(dr[0], dr[1]);
-		//	}
-		//	return dt;
-		//}
-
-
+		public static DataTable LoadDataTableUsingExecuteReader(SqlConnection conn, CommandType cmdType, string cmdText, SqlParameter[] cmdParms)
+		{
+			DataTable result = new DataTable();
+			using (SqlCommand theSqlCommand = conn.CreateCommand())
+			{
+				theSqlCommand.CommandType = cmdType;
+				theSqlCommand.CommandText = cmdText;
+				result.Load(reader: theSqlCommand.ExecuteReader(CommandBehavior.CloseConnection), loadOption: LoadOption.Upsert);
+			}
+			return result;
+		}
 	}
 }
