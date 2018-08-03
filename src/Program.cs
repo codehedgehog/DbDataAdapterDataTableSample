@@ -1,4 +1,4 @@
-﻿namespace NetCoreDbDataAdapterDataTableSample
+﻿namespace NetCoreSqlClientPlay
 {
 	using System;
 	using System.Data;
