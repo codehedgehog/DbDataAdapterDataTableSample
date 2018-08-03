@@ -1,6 +1,6 @@
-# .NET Core DbDataAdapter and DataTable Sample
+# .NET Core Playing with System.Data.SqlClient
 
-Sample .NET Core console app to explore the usage of DbDataAdapter and DataTable from System.Data.Common 
+Sample .NET Core console app to play with System.Data.SqlCliet (DbDataAdapter, DataTable, etc.)
 
 
 ## NuGet Packages
@@ -14,3 +14,4 @@ Sample .NET Core console app to explore the usage of DbDataAdapter and DataTable
 ## References
 
 * [Executing Raw SQL Queries using EF Core](https://www.learnentityframeworkcore.com/raw-sql)
+* [Data access via SqlDataReader in ASP.NET Core](https://blogs.msdn.microsoft.com/devfish/2017/05/15/data-access-via-sqldatareader-in-asp-net-core-1-1-and-2-0/)
