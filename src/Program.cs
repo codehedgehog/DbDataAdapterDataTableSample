@@ -12,11 +12,12 @@
 		{
 			using (SqlConnection theSqlConn = new SqlConnection(connectionString: ConnectionStrings["theDatabaseDbContext"].ConnectionString))
 			{
-
+				Console.WriteLine("Playing with System.Data.SqlClient\n==================================\n\n");
+				Console.WriteLine("Open SQL Server Database Connection\n==================================\n");
 				theSqlConn.Open();
 				DataTable resultDataTable = FillDataTableUsingSqlDataAdapter(
 					conn: theSqlConn, cmdType: CommandType.Text, 
-				  cmdText:	"SELECT [t].[Description] [TermName] FROM [dbo].[tblTerm] [t] ORDER BY [t].[TermCode] DESC", cmdParms: null);
+				  cmdText:	"SELECT TOP 5 [t].[Description] [TermName] FROM [dbo].[tblTerm] [t] ORDER BY [t].[TermCode] DESC", cmdParms: null);
 				foreach (DataRow term in resultDataTable.Rows)
 				{
 					Console.WriteLine(term[0]);
@@ -36,6 +37,7 @@
 				//{
 				//	if (theSqlConn != null && theSqlConn.State != ConnectionState.Closed) theSqlConn.Close();
 				//}
+				Console.WriteLine("\nPress any key to continue...");
 				Console.ReadLine();
 			}
 		}
